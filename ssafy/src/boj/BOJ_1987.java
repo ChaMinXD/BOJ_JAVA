@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
@@ -16,15 +17,8 @@ public class BOJ_1987 {
 	static int way=4;
 	static int[][] ways= {{1,0},{-1,0},{0,1},{0,-1}};
 	static ArrayList<Integer> isAlready=new ArrayList();	
+	static ArrayList<Integer> ans=new ArrayList();
 	static int max=-1;
-	static class Position{
-		int x;
-		int y;
-		Position(int x,int y){
-			this.x=x;
-			this.y=y;
-		}
-	}
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
@@ -40,13 +34,31 @@ public class BOJ_1987 {
 				map[i][j]=c[j];
 			}
 		}
+		isAlready.add(map[0][0]-'0');
 		visited[0][0]=1;
+		dfs(0,0,1);
+		System.out.println(Collections.max(ans));
 		
-
-	
 	}
-	static void dfs() {
-		
+	static void dfs(int x,int y,int cnt) {
+		boolean check=false;
+		for(int i=0;i<way;i++) {
+			int nx=x+ways[i][0];
+			int ny=y+ways[i][1];
+			if(nx<0||nx>R-1||ny<0||ny>C-1) continue;
+			if(visited[nx][ny]!=0) continue;
+			if(isAlready.contains(map[nx][ny]-'0')) continue;
+			visited[nx][ny]=cnt+1;
+			isAlready.add(map[nx][ny]-'0');
+
+			check=true;
+			dfs(nx,ny,cnt+1);
+			isAlready.remove(isAlready.size()-1);
+			visited[nx][ny]=0;
+		}
+		if(!check) {
+			ans.add(cnt);
+		}
 	}
 	
 	
