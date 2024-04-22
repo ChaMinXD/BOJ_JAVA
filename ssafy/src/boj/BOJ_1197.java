@@ -69,8 +69,8 @@ public class BOJ_1197 {
 	}
 	static int find(int x) {
 		if(parent[x]==x) return x;
-		else return find(parent[x]);
+		else return parent[x]=find(parent[x]);
+		
 	}
 	
-
 }

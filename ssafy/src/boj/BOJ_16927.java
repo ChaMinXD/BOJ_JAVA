@@ -48,15 +48,23 @@ public class BOJ_16927 {
 			int rotate=R%((row+col-2)*2);
 			for(int k=0;k<rotate;k++) {
 				for(int j=1+i;j<M-i;j++) {
-					map[i][j-1]=map[i][j];
-					map[N-1-i][M-j]=map[N-1-i][M-1-j];
+					next_map[i][j-1]=map[i][j];
+					next_map[N-1-i][M-j]=map[N-1-i][M-1-j];
 				}
 				for(int j=1+i;j<N-i;j++) {
-					map[j][i]=map[j-1][i];
-					map[N-j-1][M-1-i]=map[N-j][M-1-i];
+					next_map[j][i]=map[j-1][i];
+					next_map[N-j-1][M-1-i]=map[N-j][M-1-i];
 				}
 			
-				
+				for(int j=i;j<M-i;j++) {
+					map[i][j]=next_map[i][j];
+					map[N-1-i][j]=next_map[N-1-i][j];
+				}
+				for(int j=i;j<N-i;j++) {
+					map[j][i]=next_map[j][i];
+					map[j][M-1-i]=next_map[j][M-1-i];
+					
+				}
 			}
 		
 		}
