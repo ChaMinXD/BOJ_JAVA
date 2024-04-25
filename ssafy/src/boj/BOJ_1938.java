@@ -80,14 +80,14 @@ public class BOJ_1938 {
 				if (tr.dir == 0) { // 세로
 					if (nx - 1 < 0 || nx + 1 > N - 1 || ny < 0 || ny > N - 1)
 						continue;
-					if (visited[tr.dir][nx][ny] != 0 && visited[tr.dir][nx][ny] <= visited[tr.dir][now.x][now.y] + 1)
+					if (visited[tr.dir][nx][ny] != 0)
 						continue;
 					if (map[nx][ny] == 1 || map[nx - 1][ny] == 1 || map[nx + 1][ny] == 1)
 						continue;
 				} else {// 가로
 					if (nx < 0 || nx > N - 1 || ny - 1 < 0 || ny + 1 > N - 1)
 						continue;
-					if (visited[tr.dir][nx][ny] != 0 && visited[tr.dir][nx][ny] <= visited[tr.dir][now.x][now.y] + 1)
+					if (visited[tr.dir][nx][ny] != 0)
 						continue;
 					if (map[nx][ny] == 1 || map[nx][ny - 1] == 1 || map[nx][ny + 1] == 1)
 						continue;
@@ -110,8 +110,7 @@ public class BOJ_1938 {
 			}
 			if (!check) {
 				int ndir = (tr.dir + 1) % 2;
-				if (visited[ndir][now.x][now.y] != 0
-						&& visited[ndir][now.x][now.y] <= visited[tr.dir][now.x][now.y] + 1)
+				if (visited[ndir][now.x][now.y] != 0)
 					continue;
 				visited[ndir][now.x][now.y] = visited[tr.dir][now.x][now.y] + 1;
 				q.add(new Train(ndir, new Pos(now.x, now.y)));
